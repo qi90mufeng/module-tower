@@ -1,8 +1,9 @@
 package com.albert.repository;
 
-import com.albert.document.GoodsInfo;
+import com.albert.document.UserInfo;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Component;
+
 /**
  * ////////////////////////////////////////////////////////////////////
  * //                          _ooOoo_                               //
@@ -32,6 +33,5 @@ import org.springframework.stereotype.Component;
  * @date 2019-01-07
  */
 @Component
-public interface GoodsRepository extends ElasticsearchRepository<GoodsInfo,Long> {
-
+public interface UserRepository extends ElasticsearchRepository<UserInfo,Long> {
 }
