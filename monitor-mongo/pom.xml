@@ -53,10 +53,16 @@
             <artifactId>lombok</artifactId>
             <version>1.18.6</version>
         </dependency>
+
+        <dependency>
+            <groupId>albert.wistein</groupId>
+            <artifactId>monitor-utils</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
-        <finalName>monitor-es</finalName>
+        <finalName>monitor-mongo</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
