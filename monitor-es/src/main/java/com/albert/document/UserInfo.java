@@ -3,7 +3,7 @@ package com.albert.document;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.GeoPointField;
 
-@Document(indexName = "testgoods",type = "userPosition")
+@Document(indexName = "testuser",type = "userPosition")
 public class UserInfo {
     private Long id;
     //用户名
@@ -12,11 +12,6 @@ public class UserInfo {
     private String sex;
     //年龄
     private Integer age;
-//    //经度
-//    private String longitude;
-//    //纬度
-//    private String latitude;
-
     /**
       * 地理位置经纬度
       * lat纬度，lon经度 "40.715,-74.011"

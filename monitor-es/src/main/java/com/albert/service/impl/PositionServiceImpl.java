@@ -41,8 +41,8 @@ public class PositionServiceImpl implements PositionService {
     private UserRepository userRepository;
 
     @Override
-    public Page<UserInfo> findNearByPeople(String longitude, String latitude, double distance) {
-        Pageable pageable = PageRequest.of(1,10);
+    public Page<UserInfo> findNearByPeople(String longitude, String latitude, double distance, Integer pageNum, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNum,pageSize);
 
         GeoDistanceQueryBuilder builder =
                 QueryBuilders.geoDistanceQuery("location")//查询字段
