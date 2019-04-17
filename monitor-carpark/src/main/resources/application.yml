@@ -1,0 +1,14 @@
+mongodb:
+    primary:
+        host: localhost
+        port: 27017
+        database: test
+    secondary:
+        host: localhost
+        port: 27017
+        database: local
+server:
+    port: 8005
+    servlet:
+        context-path: /carpark
+    uri-encoding: utf-8
