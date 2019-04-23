@@ -1,12 +1,17 @@
 package com.albert.document;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.annotations.GeoPointField;
 
 @Document(indexName = "testuser",type = "userPosition")
 public class UserInfo {
+    @Id
     private Long id;
-    //用户名
+    //用户名 如果要搜索出的结果尽可能全，可以使用ik_max_word，如果需要结果尽可能精确，可以使用ik_smart
+    @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
     private String userName;
     //性别
     private String sex;
