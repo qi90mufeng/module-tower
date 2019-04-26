@@ -9,6 +9,8 @@
 | monitor-rule    | 8002 | easy-rule               |
 | monitor-utils   |      | 邮件服务、              |
 | monitor-carpark | 8005 | 停车场                  |
+| monitor-zk      |      | zookeeper               |
+| monitor-task    | 8006 | 任务管理系统            |
 
 
 
