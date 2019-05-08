@@ -4,7 +4,6 @@ import com.albert.data.ChineseNameData;
 import com.albert.document.UserInfo;
 import com.albert.repository.UserRepository;
 import com.albert.service.PositionService;
-import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.geo.GeoDistance;
 import org.elasticsearch.common.unit.DistanceUnit;
 import org.elasticsearch.index.query.GeoDistanceQueryBuilder;
@@ -20,7 +19,6 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +31,6 @@ public class PositionServiceImpl implements PositionService {
     private static final double lat = 39.929986;
     private static final double lon = 116.395645;
 
-    @Autowired
-    private TransportClient client;
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
     @Autowired

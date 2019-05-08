@@ -1,5 +1,6 @@
 package com.albert.config;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,9 +21,11 @@ public class SwaggerConfig {
 	@Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .enable(true)    //swaggerEnable
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.albert"))
+                //.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())
                 .build();
     }
