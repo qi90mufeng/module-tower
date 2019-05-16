@@ -1,0 +1,35 @@
+{
+  "index": {
+    "analysis": {
+      "analyzer": {
+        "ik_pinyin_analyzer": {
+          "type": "custom",
+          "tokenizer": "ik_max_word",
+          "filter": [
+            "my_pinyin",
+            "my_stopwords"
+          ]
+        },
+        "ik_pinyin_analyzer_for_search": {
+          "type": "custom",
+          "tokenizer": "ik_smart",
+          "filter": [
+            "my_stopwords"
+          ]
+        }
+      },
+      "filter": {
+        "my_pinyin": {
+          "type": "pinyin",
+          "keep_separate_first_letter" : false,
+          "keep_full_pinyin": true,
+          "keep_original" : true
+        },
+        "my_stopwords": {
+          "type": "stop",
+          "stopwords": ["的","de","d"]
+        }
+      }
+    }
+  }
+}

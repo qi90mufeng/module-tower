@@ -1,0 +1,38 @@
+{
+  "testuser": {
+    "_all": {
+      "enabled": true
+    },
+    "properties": {
+      "id": {
+        "type": "long"
+      },
+      "userName": {
+        "type": "text",
+        "analyzer": "ik_pinyin_analyzer",
+        "search_analyzer": "ik_pinyin_analyzer_for_search"
+      },
+      "sex": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "age": {
+        "type": "long"
+      },
+      "location": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      }
+    }
+  }
+}

@@ -5,13 +5,25 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.annotations.GeoPointField;
+import org.springframework.data.elasticsearch.annotations.Mapping;
+import org.springframework.data.elasticsearch.annotations.Setting;
 
-@Document(indexName = "testuser",type = "userPosition")
+/**
+ * 现在不加type，生成时，自动加type为类名，userinfo
+ *
+ * 不仅限于java添加mapping和setting，可以用es操作
+ */
+@Document(indexName = "testuser")
+@Mapping(mappingPath = "/es/userinfo-mapping.json")
+@Setting(settingPath = "/es/userinfo-setting.json")
 public class UserInfo {
+    //自定义分析器
+    private static final String insert = "ik_pinyin_analyzer";
+    private static final String search = "ik_pinyin_analyzer_for_search";
     @Id
     private Long id;
     //用户名 如果要搜索出的结果尽可能全，可以使用ik_max_word，如果需要结果尽可能精确，可以使用ik_smart
-    @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
+    @Field(type = FieldType.Text, analyzer = insert, searchAnalyzer = search)
     private String userName;
     //性别
     private String sex;

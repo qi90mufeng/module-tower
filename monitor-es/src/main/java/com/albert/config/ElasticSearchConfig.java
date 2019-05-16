@@ -40,6 +40,8 @@ public class ElasticSearchConfig {
     public void initialize() throws Exception {
         Settings esSettings = Settings.builder()
                 .put("cluster.name", clusterName)
+                //如果有配置xpack插件，需要配置登录
+//                .put("xpack.security.user", "elastic:changeme")
                 .put("client.transport.sniff", true).build();
         client = new PreBuiltTransportClient(esSettings);
 

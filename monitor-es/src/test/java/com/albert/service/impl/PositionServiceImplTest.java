@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest()
@@ -49,4 +51,12 @@ public class PositionServiceImplTest {
         Page<UserInfo> nearByPeople = positionService.findNearByPeople("116.923412", "39.876632", 1000, 1, 10);
         System.out.println(nearByPeople);
     }
+
+    @Test
+    public void searchHighlightOfNearBy(){
+        List<UserInfo> nearByPeople = positionService.searchHighlightOfNearBy("李");
+        System.out.println(nearByPeople);
+    }
+
+
 }

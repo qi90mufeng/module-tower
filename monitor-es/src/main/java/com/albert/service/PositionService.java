@@ -3,6 +3,8 @@ package com.albert.service;
 import com.albert.document.UserInfo;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 public interface PositionService {
 
     /**
@@ -27,4 +29,11 @@ public interface PositionService {
      * @return
      */
     String clearNearBy();
+
+    /**
+     * 高亮搜索用户
+     * @param userName
+     * @return
+     */
+    List<UserInfo> searchHighlightOfNearBy(String userName);
 }
