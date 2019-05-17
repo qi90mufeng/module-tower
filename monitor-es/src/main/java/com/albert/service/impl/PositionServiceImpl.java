@@ -80,8 +80,10 @@ public class PositionServiceImpl implements PositionService {
             UserInfo info = new UserInfo();
             info.setId((long)i);
             ChineseNameData.getChineseName(info);
+            ChineseNameData.getUserAge(info);
             ChineseNameData.setLocation(info,lon,lat);
             //client.prepareIndex("testgoods", "userPosition").setSource(info);
+            ChineseNameData.getAddress(info);
             list.add(info);
             //userRepository.save(info);
         }
@@ -105,7 +107,7 @@ public class PositionServiceImpl implements PositionService {
         highlightBuilder.field("userName");
         //查询用户
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
-        QueryBuilder queryBuilder2 = QueryBuilders.wildcardQuery("userName", userName);
+        QueryBuilder queryBuilder2 = QueryBuilders.matchPhraseQuery("userName", userName);
         boolQueryBuilder.must(queryBuilder2);
 
         SearchResponse response = elasticsearchTemplate.getClient().prepareSearch("testuser")
@@ -113,6 +115,7 @@ public class PositionServiceImpl implements PositionService {
                 .highlighter(highlightBuilder)
                 .execute().actionGet();
         SearchHits searchHits = response.getHits();
+        //TODO 暂未加入日志框架，先使用sout
         System.out.println("记录数-->" + searchHits.getTotalHits());
 
         List<UserInfo> list = new ArrayList<>();

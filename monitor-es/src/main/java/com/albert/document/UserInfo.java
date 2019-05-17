@@ -25,6 +25,9 @@ public class UserInfo {
     //用户名 如果要搜索出的结果尽可能全，可以使用ik_max_word，如果需要结果尽可能精确，可以使用ik_smart
     @Field(type = FieldType.Text, analyzer = insert, searchAnalyzer = search)
     private String userName;
+    //用户住址
+    @Field(type = FieldType.Text, analyzer = insert, searchAnalyzer = search)
+    private String userAddr;
     //性别
     private String sex;
     //年龄
@@ -63,6 +66,14 @@ public class UserInfo {
 
     public Integer getAge() {
         return age;
+    }
+
+    public String getUserAddr() {
+        return userAddr;
+    }
+
+    public void setUserAddr(String userAddr) {
+        this.userAddr = userAddr;
     }
 
     public void setAge(Integer age) {

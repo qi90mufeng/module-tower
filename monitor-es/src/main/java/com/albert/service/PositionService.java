@@ -25,7 +25,7 @@ public interface PositionService {
     String initNearBy();
 
     /**
-     * 清楚附近人信息
+     * 清除附近人信息
      * @return
      */
     String clearNearBy();
