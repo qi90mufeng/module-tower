@@ -28,6 +28,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -110,9 +111,16 @@ public class PositionServiceImpl implements PositionService {
         QueryBuilder queryBuilder2 = QueryBuilders.matchPhraseQuery("userName", userName);
         boolQueryBuilder.must(queryBuilder2);
 
+        //将距离存入sort中
+        GeoDistanceSortBuilder sort = SortBuilders.geoDistanceSort("location", Double.valueOf(lat) , Double.valueOf(lon))
+                .unit(DistanceUnit.KILOMETERS).order(SortOrder.ASC);
+
         SearchResponse response = elasticsearchTemplate.getClient().prepareSearch("testuser")
                 .setQuery(boolQueryBuilder)
                 .highlighter(highlightBuilder)
+                .addSort(sort)
+                .setFrom(0)
+                .setSize(50)
                 .execute().actionGet();
         SearchHits searchHits = response.getHits();
         //TODO 暂未加入日志框架，先使用sout
@@ -129,6 +137,11 @@ public class PositionServiceImpl implements PositionService {
                 entity.setUserName(text[0].toString());
             }
             if (!CollectionUtils.isEmpty(entityMap)) {
+                //高亮字段
+                if (StringUtils.isEmpty(entity.getUserName()) && !StringUtils.isEmpty(entityMap.get("userName"))) {
+                    entity.setUserName(String.valueOf(entityMap.get("userName")));
+                }
+                //普通字段
                 if (!StringUtils.isEmpty(entityMap.get("id"))) {
                     entity.setId(Long.valueOf(String.valueOf(entityMap.get("id"))));
                 }
@@ -139,6 +152,8 @@ public class PositionServiceImpl implements PositionService {
                     entity.setAge(Integer.valueOf(String.valueOf(entityMap.get("age"))));
                 }
                 if (!StringUtils.isEmpty(entityMap.get("location"))) {
+                    //获取距离值，并保留两位小数点  geoDis就是距离，距离存储在sortvalues中，距离单位由sort中的uni决定
+                    //BigDecimal geoDis = new BigDecimal((Double) hit.getSortValues()[0]).setScale(2, BigDecimal.ROUND_HALF_DOWN);
                     entity.setLocation(String.valueOf(entityMap.get("location")));
                 }
             }
