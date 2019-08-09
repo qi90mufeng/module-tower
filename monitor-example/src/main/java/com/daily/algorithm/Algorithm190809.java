@@ -38,5 +38,20 @@ public class Algorithm190809 {
     }
 
     //other-people
-
+    public int reverse2(int x) {
+        int f = 1;
+        if(x == 0)return 0;
+        if(x < 0 ){
+            x = -x;
+            f = -1;
+        }
+        long re = 0l;
+        while(x > 0){
+            re = re*10 + x%10;
+            x = x/10;
+        }
+        re = f*re;
+        if(re > Integer.MAX_VALUE || re < Integer.MIN_VALUE)return 0;
+        else return (int)re;
+    }
 }
